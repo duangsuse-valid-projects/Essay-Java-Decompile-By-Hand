@@ -1,0 +1,178 @@
+0: aload_0
+1: arraylength
+2: ifle          9
+5: iconst_1
+6: goto          10
+9: iconst_0
+10: dup
+11: istore_1
+
+; %1 = args.length<=0? 0 : 1
+
+12: ifeq          99
+
+; if (args.length > 0) goto 99
+; else
+
+15: aload_0
+16: iconst_0
+17: aaload
+18: astore_2
+; %2 = args[0]
+
+19: aload_2
+20: invokevirtual #2                  // Method java/lang/String.toLowerCase:()Ljava/lang/String;
+; $1 = %2.toLowerCase()
+
+23: ldc           #3                  // String ^-
+25: ldc           #4                  // String
+27: invokevirtual #5                  // Method 
+java/lang/String.replaceAll:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/
+String;
+; $2 = $1.replaceAll("^-", "")
+
+30: astore_2
+; %2 = $2
+
+31: aload_2
+32: ldc           #6                  // String f
+34: invokevirtual #7                  // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+37: ifne          49
+; if (%2.equals("f")) goto 49
+; else
+
+40: aload_2
+41: ldc           #8                  // String alwayscontinue
+43: invokevirtual #7                  // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+46: ifeq          53
+; if (%2.equals("alwayscontinue")) goto 53
+
+49: iconst_1
+50: goto          54
+53: iconst_0
+54: istore_1
+
+;; %1 = args[0].toLowerCase().replaceAll("^-", "")
+;; %1 = switch (%1) { case "f": 1;; case "alwayscontinue": 0 } 
+
+55: getstatic     #9                  // Field 
+java/lang/System.out:Ljava/io/PrintStream;
+58: new           #10                 // class java/lang/StringBuilder
+61: dup
+62: invokespecial #11                 // Method java/lang/StringBuilder."<init>":()V
+65: ldc           #12                 // String arg: \"
+67: invokevirtual #13                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+70: aload_2
+71: invokevirtual #13                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+74: ldc           #14                 // String \"
+76: invokevirtual #13                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+79: iload_1
+80: ifeq          88
+83: ldc           #15                 // String accepted
+85: goto          90
+88: ldc           #16                 // String ignored
+90: invokevirtual #13                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+93: invokevirtual #17                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+96: invokevirtual #18                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+
+
+99: new           #19                 // class okhttp3/OkHttpClient$Builder
+102: dup
+103: invokespecial #20                 // Method okhttp3/OkHttpClient$Builder."<init>":()V
+106: invokevirtual #21                 // Method okhttp3/OkHttpClient$Builder.build:()Lokhttp3/OkHttpClient;
+109: astore_2
+110: new           #22                 // class java/util/Random
+113: dup
+114: invokespecial #23                 // Method java/util/Random."<init>":()V
+117: astore        5
+119: iconst_0
+120: istore        10
+122: aload         5
+124: invokevirtual #24                 // Method java/util/Random.nextLong:()J
+127: ldc2_w        #25                 // long 100000000l
+130: lrem
+131: ldc2_w        #27                 // long 900000000l
+134: ladd
+135: lstore        6
+137: bipush        10
+139: iconst_1
+140: iconst_1
+141: invokestatic  #29                 // Method org/apache/commons/lang/RandomStringUtils.random:(IZZ)Ljava/lang/String;
+144: astore        8
+146: new           #10                 // class java/lang/StringBuilder
+149: dup
+150: invokespecial #11                 // Method java/lang/StringBuilder."<init>":()V
+153: ldc           #30                 // String {\"u\":\"
+155: invokevirtual #13                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+158: lload         6
+160: invokevirtual #31                 // Method java/lang/StringBuilder.append:(J)Ljava/lang/StringBuilder;
+163: ldc           #32                 // String \",\"p\":\"
+165: invokevirtual #13                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+168: aload         8
+170: invokevirtual #13                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+173: ldc           #33                 // String \"}
+175: invokevirtual #13                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+178: invokevirtual #17                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+181: astore_3
+182: new           #34                 // class java/lang/String
+185: dup
+186: invokestatic  #35                 // Method java/util/Base64.getEncoder:()Ljava/util/Base64$Encoder;
+189: aload_3
+190: invokevirtual #36                 // Method java/lang/String.getBytes:()[B
+193: invokevirtual #37                 // Method java/util/Base64$Encoder.encode:([B)[B
+196: invokespecial #38                 // Method java/lang/String."<init>":([B)V
+199: astore        4
+201: new           #39                 // class okhttp3/Request$Builder
+204: dup
+205: invokespecial #40                 // Method okhttp3/Request$Builder."<init>":()V
+208: new           #10                 // class java/lang/StringBuilder
+211: dup
+212: invokespecial #11                 // Method java/lang/StringBuilder."<init>":()V
+215: ldc           #41                 // String https://fffniubi888.cn/user.php?token=
+217: invokevirtual #13                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+220: aload         4
+222: invokevirtual #13                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+225: invokevirtual #17                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+228: invokevirtual #42                 // Method okhttp3/Request$Builder.url:(Ljava/lang/String;)Lokhttp3/Request$Builder;
+231: invokevirtual #43                 // Method okhttp3/Request$Builder.build:()Lokhttp3/Request;
+234: astore        11
+236: aload_2
+237: aload         11
+239: invokevirtual #44                 // Method okhttp3/OkHttpClient.newCall:(Lokhttp3/Request;)Lokhttp3/Call;
+242: invokeinterface #45,  1           // InterfaceMethod okhttp3/Call.execute:()Lokhttp3/Response;
+247: astore        9
+249: goto          279
+252: astore        12
+254: aload         12
+256: invokevirtual #47                 // Method java/net/SocketTimeoutException.printStackTrace:()V
+259: goto          321
+262: astore        12
+264: iload_1
+265: ifeq          276
+268: aload         12
+270: invokevirtual #49                 // Method java/lang/Exception.printStackTrace:()V
+273: goto          321
+276: aload         12
+278: athrow
+279: getstatic     #9                  // Field java/lang/System.out:Ljava/io/PrintStream;
+282: new           #10                 // class java/lang/StringBuilder
+285: dup
+286: invokespecial #11                 // Method java/lang/StringBuilder."<init>":()V
+289: aload         9
+291: invokevirtual #50                 // Method java/lang/StringBuilder.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+294: ldc           #51                 // String \t\t
+296: invokevirtual #13                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+299: iload         10
+301: invokevirtual #52                 // Method java/lang/StringBuilder.append:(I)Ljava/lang/StringBuilder;
+304: invokevirtual #17                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+307: invokevirtual #18                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+310: aload         9
+312: invokevirtual #53                 // Method okhttp3/Response.close:()V
+315: ldc2_w        #54                 // long 100l
+318: invokestatic  #56                 // Method java/lang/Thread.sleep:(J)V
+321: iinc          10, 1
+324: goto          122
+Exception table:
+from    to  target type
+    236   249   252   Class java/net/SocketTimeoutException
+    236   249   262   Class java/lang/Exception
