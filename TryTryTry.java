@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class TryTryTry {
     public static void main(String... args) throws InterruptedException {
-        if (args.length < 0) {
+        if (args.length <= 0) {
             // @99
             // control flow skip:
         } else {
